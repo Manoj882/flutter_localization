@@ -1,0 +1,38 @@
+{
+    "hello" : "Hello {username}",
+    "@hello" : {
+        "description" : "Hello",
+        "placeholders" : {
+            "username": {
+                "type": "String"
+            }
+        }
+    },
+
+    "welcome" : "Welcome to My App.",
+    "@welcome": {
+        "description": "Welcome to My App"
+    },
+    "appTitle" : "My App",
+    "@language": {
+        "description": "My App"
+    },
+    "english" : "English",
+    "@english": {
+        "description": "English"
+    },
+    "nepali" : "Nepali",
+    "@nepali": {
+        "description": "Nepali"
+    },
+    "next" : "Next",
+    "@nepali": {
+        "description": "Next"
+    },
+    "personalDetails" : "Personal Details",
+    "@nepali": {
+        "description": "Personal Details"
+    }
+
+
+}
