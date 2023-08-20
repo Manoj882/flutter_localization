@@ -12,6 +12,7 @@ class CustomTextFormField extends StatelessWidget {
       this.textInputAction,
     this.hintText,
     this.validator,
+    this.onChanged,
     super.key});
 
   final TextEditingController? controller;
@@ -19,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final String? hintText;
   final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
 
 
 
@@ -52,6 +54,7 @@ class CustomTextFormField extends StatelessWidget {
               ),
             ),
             validator: validator,
+            onChanged: onChanged,
 
           );
   }
