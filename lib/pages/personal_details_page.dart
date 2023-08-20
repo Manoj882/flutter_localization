@@ -15,37 +15,15 @@ class PersonalDetailsPage extends StatefulWidget {
 }
 
 class _PersonalDetailsPageState extends State<PersonalDetailsPage> {
-  String _firstName = '';
 
-  String _middleName = '';
+  PersonDetails? _personalDetails;
 
-  String _lastName = '';
-
-  String _dob = '';
-
-  void _updateFirstName(String value) {
+  void _updatePersonalDetails(PersonDetails details) {
     setState(() {
-      _firstName = value;
+      _personalDetails = details;
     });
   }
-
-  void _updateMIddleName(String value) {
-    setState(() {
-      _middleName = value;
-    });
-  }
-
-  void _updateLastName(String value) {
-    setState(() {
-      _lastName = value;
-    });
-  }
-
-  void _updateDob(String value) {
-    setState(() {
-      _dob = value;
-    });
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +40,8 @@ class _PersonalDetailsPageState extends State<PersonalDetailsPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               PersonalDetailsTile(
-                onFirstNameChanged: _updateFirstName,
-                onMiddleNameChanged: _updateMIddleName,
-                onLastNameChanged: _updateLastName,
-                onDobChanged: _updateDob,
+                onPersonalDetailsChanged: _updatePersonalDetails,
+                
               ),
               // SizedBox(height: 16,),
               // AddressDetailsTile(),
@@ -79,15 +55,8 @@ class _PersonalDetailsPageState extends State<PersonalDetailsPage> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  final userInfoModel = UserInfo(
-                    personDetails: PersonDetails(
-                      firstName: _firstName,
-                      lastName: _lastName,
-                      dob: _dob,
-                    ),
-                  );
-
-                  print('User Info Model: $userInfoModel');
+                  final userInfo = UserInfo(personDetails: _personalDetails!);
+                  
                 },
                 child: Text("Submit"),
               ),

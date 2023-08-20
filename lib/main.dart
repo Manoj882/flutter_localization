@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization_app/l10n/l10n.dart';
 import 'package:flutter_localization_app/pages/personal_details_page.dart';
@@ -9,7 +11,13 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const MyApp(),
+      
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,9 +32,15 @@ class MyApp extends StatelessWidget {
         final provider = Provider.of<LocaleProvider>(context);
         return MaterialApp(
           title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
+          useInheritedMediaQuery: true,
+          builder: DevicePreview.appBuilder,
+
+          // theme: ThemeData(
+          //   primarySwatch: Colors.blue,
+          
+          // ),
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
           // supportedLocales: L10n.all,
           // localizationsDelegates: const [
           //     AppLocalizations.delegate,
@@ -34,7 +48,9 @@ class MyApp extends StatelessWidget {
           //     GlobalWidgetsLocalizations.delegate,
           //     GlobalCupertinoLocalizations.delegate,
           // ],
-          locale: provider.locale,
+          // locale: provider.locale,
+          locale: provider.locale ??  DevicePreview.locale(context),
+        
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           home: MyHomePage(),
@@ -72,9 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Intl.message(
                 AppLocalizations.of(context)!.hello(userName),
                 args: [userName],
-                
                 desc: 'Greeting with dynamic username',
-                
               ),
               style: const TextStyle(
                 fontSize: 18,
